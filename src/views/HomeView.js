@@ -6,16 +6,19 @@ export default function HomeView() {
 
   useEffect(() => {
     API.FetchCharacters()
-      .then(r => r.results)
+        .then(r =>r.results)
       .then(setCharacters);
   }, []);
-
+ 
   return (
     <>
       {characters && (
         <ul>
           {characters.map(character => (
-            <li key={character.id}>{character.name}</li>
+            <li key={character.id}>{character.name}
+              <br />
+            <img src={character.image} alt="" />
+            </li>
           ))}
         </ul>
       )}

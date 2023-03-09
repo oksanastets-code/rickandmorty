@@ -12,3 +12,8 @@ export function FetchCharacters() {
     `${BASE_URL}`,
   );
 }
+export function FetchCharacterDetails(id) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/${id}`,
+  );
+}

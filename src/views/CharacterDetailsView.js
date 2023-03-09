@@ -7,9 +7,11 @@ export default function CharacterDetailsView() {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
   let navigate = useNavigate();
+  
   useEffect(() => {
     API.FetchCharacterDetails(id).then(setCharacter);
   }, [id]);
+
   const onGoBack = () => {
     navigate(location?.state?.from ?? '/');
   };

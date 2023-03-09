@@ -17,3 +17,9 @@ export function FetchCharacterDetails(id) {
     `${BASE_URL}/${id}`,
   );
 }
+
+export function FetchLoadMore(page) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/?page=${page}`,
+  );
+}

@@ -23,3 +23,9 @@ export function FetchLoadMore(page) {
     `${BASE_URL}/?page=${page}`,
   );
 }
+
+export function FetchFiltered(query) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/?name=${query}`,
+  );
+}

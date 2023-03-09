@@ -14,6 +14,9 @@ export default function HomeView() {
   const [query, setQuery] = useState('');
   const [filtered, setFiltered] = useState([]);
 
+  const [isFirstLoading, setFirstLoading] = useState(true);
+  const [isFiltered, setIsFiltered] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -35,6 +38,7 @@ export default function HomeView() {
     e.preventDefault();
     setQuery(filter);
     navigate({ ...location, search: `query=${filter}` });
+    setCharacters([]);
   };
 
   useEffect(() => {
@@ -43,7 +47,7 @@ export default function HomeView() {
     }
     API.FetchFiltered(query)
       .then(r => r.results)
-      .then(setFiltered);
+      .then(setFiltered)
   }, [query]);
 
   // const onLoadMoreClick = () => {

@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLoaderData, useNavigation, useLocation, useNavigate} from 'react-router-dom';
 import * as API from '../services/api';
 
 export default function CharacterDetailsView() {
-  const location = useLocation();
   const { id } = useParams();
+  // const { image, name, species, gender, status, type } = useLoaderData();
+  const { state } = useNavigation();
+  const location = useLocation();
   const [character, setCharacter] = useState(null);
   let navigate = useNavigate();
+
   useEffect(() => {
     API.FetchCharacterDetails(id).then(setCharacter);
   }, [id]);
@@ -29,6 +32,14 @@ export default function CharacterDetailsView() {
           <p>Status {character.status}</p>
           <p>Origin {character.origin.name}</p>
           <p>Type {character.type}</p>
+       
+          {/* <img src={image} alt="" />
+          <p>{name}</p>
+          <p>Specie {species}</p>
+          <p>Gender {gender}</p>
+          <p>Status {status}</p> */}
+          {/* <p>Origin {origin.name}</p> */}
+          {/* <p>Type {type}</p> */}
         </div>
       )}
     </>

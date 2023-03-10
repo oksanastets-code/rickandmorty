@@ -1,16 +1,29 @@
-import { Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Layout } from './views/Layout';
 import HomeView from './views/HomeView';
-import CharacterDetailsView from './views/CharacterDetailsView'
-function App() {
-  return (
-    <div >
-      <Routes>
-        
-     <Route path="/" element={<HomeView />}></Route>
-       <Route path="/:id" element={<CharacterDetailsView />}></Route> 
-      </Routes>
-    </div>
-  );
-}
+import CharacterDetailsView from './views/CharacterDetailsView';
+import { ErrorView } from './views/ErrorView';
 
-export default App;
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorView />,
+    children: [
+      {
+        element: <HomeView />,
+        index: true,
+        errorElement: <ErrorView />,
+      },
+      {
+        path: '/:id',
+        element: <CharacterDetailsView />,
+        errorElement: <ErrorView />,
+      },
+    ],
+  },
+]);
+
+export const App = () => (
+  <RouterProvider router={router} fallbackElement={<>LOADING!!!</>} />
+);

@@ -14,9 +14,6 @@ export default function HomeView() {
   const [query, setQuery] = useState('');
   const [filtered, setFiltered] = useState([]);
 
-  const [isFirstLoading, setFirstLoading] = useState(true);
-  const [isFiltered, setIsFiltered] = useState(false);
-
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -50,10 +47,6 @@ export default function HomeView() {
       .then(setFiltered)
   }, [query]);
 
-  // const onLoadMoreClick = () => {
-  //   useEffect(() => { },
-  //   [])
-  // };
   return (
     <>
       <form action="" onSubmit={handleSubmit}>
@@ -96,11 +89,6 @@ export default function HomeView() {
           ))}
         </ul>
       )}
-      {/* {showLoadMoreBtn && (
-        <button type="button" onClick={onLoadMoreClick}>
-          Load more
-        </button>
-      )} */}
     </>
   );
 }

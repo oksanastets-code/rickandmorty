@@ -7,17 +7,17 @@ export default function CharacterDetailsView() {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
   let navigate = useNavigate();
-  
   useEffect(() => {
     API.FetchCharacterDetails(id).then(setCharacter);
   }, [id]);
 
   const onGoBack = () => {
-    navigate(location?.state?.from ?? '/');
+    // navigate(location?.state?.from ?? '/');
+    navigate(-1);
   };
   return (
     <>
-      <button type="button" onClick={onGoBack}>
+      <button type="button" onClick={onGoBack} location={location}>
         Go back
       </button>
       {character && (

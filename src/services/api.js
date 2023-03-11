@@ -18,11 +18,11 @@ export function FetchCharacterDetails(id) {
   );
 }
 
-export function FetchLoadMore(page) {
-  return fetchWithErrorHandling(
-    `${BASE_URL}/?page=${page}`,
-  );
-}
+// export function FetchLoadMore(page) {
+//   return fetchWithErrorHandling(
+//     `${BASE_URL}/?page=${page}`,
+//   );
+// }
 
 export function FetchFiltered(query) {
   return fetchWithErrorHandling(

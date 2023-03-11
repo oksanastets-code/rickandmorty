@@ -1,41 +1,30 @@
 import { useState, useEffect } from 'react';
 import {
-  Link,
+  useLoaderData,
   useLocation,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
 import * as API from '../services/api';
 
-export default function HomeView() {
-  const [characters, setCharacters] = useState([]);
-  // const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true);
-  const [filter, setFilter] = useState('');
+import CharactersList from '../components/CharactersList.jsx';
+import Searchbar from '../components/SearchBar';
+
+export const HomeView = () => {
+  const characters = useLoaderData();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const [filtered, setFiltered] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const search = searchParams.get('query');
+  console.log(search);
 
-  useEffect(() => {
-    API.FetchCharacters()
-      .then(r => r.results)
-      .then(setCharacters);
-  }, []);
-
-  const sortByName = (a, b) => a.name.localeCompare(b.name);
-
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value.toLowerCase());
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = filter => {
     setQuery(filter);
     navigate({ ...location, search: `query=${filter}` });
-    setCharacters([]);
+    // setCharacters([]);
   };
 
   useEffect(() => {
@@ -44,51 +33,28 @@ export default function HomeView() {
     }
     API.FetchFiltered(query)
       .then(r => r.results)
-      .then(setFiltered)
+      .then(setFiltered);
   }, [query]);
+
+  useEffect(() => {
+    if (search === null) {
+      return;
+    }
+
+    API.FetchFiltered(search)
+      .then(r => r.results)
+      .then(setFiltered);
+  }, [search]);
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="filter"
-          autoComplete="off"
-          autoFocus
-          placeholder="Filter by name..."
-          onChange={changeFilter}
-        />
-      </form>
-      {characters && (
-        <ul>
-          {characters.sort(sortByName).map(character => (
-            <li key={character.id}>
-              <Link to={`/${character.id}`} state={{ from: location }}>
-                <div>
-                  <img src={character.image} alt="" />
-                  <p>{character.name}</p>
-                  <p>Specie {character.species}</p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-      {filtered && (
-        <ul>
-          {filtered.sort(sortByName).map(character => (
-            <li key={character.id}>
-              <Link to={`/${character.id}`} state={{ from: location }}>
-                <div>
-                  <img src={character.image} alt="" />
-                  <p>{character.name}</p>
-                  <p>Specie {character.species}</p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      <Searchbar onSubmit={handleSubmit} />
+      {characters && <CharactersList characters={characters} />}
+      {filtered && <CharactersList characters={filtered} />}
     </>
   );
-}
+};
+export const charactersLoader = async ({ request, params }) => {
+  console.log({ request, params });
+  return API.FetchCharacters().then(r => r.results);
+};

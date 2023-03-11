@@ -4,11 +4,13 @@ import * as API from '../services/api';
 
 export default function CharacterDetailsView() {
   const { id } = useParams();
+  let navigate = useNavigate();
+  const [character, setCharacter] = useState(null);
+
   // const { image, name, species, gender, status, type } = useLoaderData();
   const { state } = useNavigation();
   const location = useLocation();
-  const [character, setCharacter] = useState(null);
-  let navigate = useNavigate();
+  console.log(location);
 
   useEffect(() => {
     API.FetchCharacterDetails(id).then(setCharacter);
@@ -44,4 +46,7 @@ export default function CharacterDetailsView() {
       )}
     </>
   );
+}
+export const characterByIdLoader = async ({ params }) => {
+  
 }

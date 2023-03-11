@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from './views/Layout';
 import  { HomeView, charactersLoader } from './views/HomeView';
 import FilteredView from './views/FilteredView';
-import CharacterDetailsView from './views/CharacterDetailsView';
+import CharacterDetailsView, { characterByIdLoader } from './views/CharacterDetailsView';
 import { ErrorView } from './views/ErrorView';
 
 const router = createBrowserRouter([
@@ -26,6 +26,7 @@ const router = createBrowserRouter([
         path: '/:id',
         element: <CharacterDetailsView />,
         errorElement: <ErrorView />,
+        loader: characterByIdLoader,
       },
     ],
   },

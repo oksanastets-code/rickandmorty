@@ -1,20 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useParams, useLoaderData, useNavigation, useLocation, useNavigate} from 'react-router-dom';
+
+import { useLoaderData, useNavigation, useLocation, useNavigate} from 'react-router-dom';
 import * as API from '../services/api';
 
 export default function CharacterDetailsView() {
-  const { id } = useParams();
+  const character = useLoaderData();
   let navigate = useNavigate();
-  const [character, setCharacter] = useState(null);
 
-  // const { image, name, species, gender, status, type } = useLoaderData();
   const { state } = useNavigation();
   const location = useLocation();
   console.log(location);
-
-  useEffect(() => {
-    API.FetchCharacterDetails(id).then(setCharacter);
-  }, [id]);
 
   const onGoBack = () => {
     // navigate(location?.state?.from ?? '/');
@@ -34,19 +28,12 @@ export default function CharacterDetailsView() {
           <p>Status {character.status}</p>
           <p>Origin {character.origin.name}</p>
           <p>Type {character.type}</p>
-       
-          {/* <img src={image} alt="" />
-          <p>{name}</p>
-          <p>Specie {species}</p>
-          <p>Gender {gender}</p>
-          <p>Status {status}</p> */}
-          {/* <p>Origin {origin.name}</p> */}
-          {/* <p>Type {type}</p> */}
-        </div>
-      )}
+        </div>)}      
     </>
   );
 }
 export const characterByIdLoader = async ({ params }) => {
-  
+  console.log({params});
+  const id = params.id;
+  return API.FetchCharacterDetails(id).then(r=>r);
 }

@@ -47,7 +47,7 @@ export const HomeView = ({filter}) => {
   const handleSubmit = filter => {
     setName(filter);
     navigate({ ...location, search: `name=${filter}` });
-    setSearchParams({ name: filter })
+    // setSearchParams({ name: filter })
   };
 
   return (
@@ -57,7 +57,6 @@ export const HomeView = ({filter}) => {
     </>
   );
 };
-export const charactersLoader = async ({ request, params }) => {
-  console.log({ request, params });
+export const charactersLoader = async () => {
   return API.FetchCharacters().then(r => r.results);
 };

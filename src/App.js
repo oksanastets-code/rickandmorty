@@ -17,12 +17,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorView />,
         // loader: charactersLoader,
       },
-      // {
-      //   path: '/?query=',
-      //   element: <FilteredView />,
-      //   errorElement: <ErrorView />,
-      //   loader: filteredLoader,
-      // },
       {
         path: '/:id',
         element: <CharacterDetailsView />,

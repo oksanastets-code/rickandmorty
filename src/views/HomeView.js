@@ -11,69 +11,53 @@ import CharactersList from '../components/CharactersList.jsx';
 import Searchbar from '../components/SearchBar';
 
 export const HomeView = ({filter}) => {
-  // let characters = useLoaderData();
+  const [name, setName] = useState('');
   const [characters, setCharacters] = useState([]);
-  // const filtered = useLoaderData();
-  const [searchParams, setSearchParams] = useSearchParams();
-  
-  const [query, setQuery] = useState('');
-  const [filtered, setFiltered] = useState([]);
-
   const location = useLocation();
-  // console.log(location.search);
-
   const navigate = useNavigate();
-  const search = searchParams.get('query');
-  // console.log(search);
-useEffect(() => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  // let characters = useLoaderData();
+  const search = searchParams.get('name');
+
+  useEffect(() => {
     API.FetchCharacters()
       .then(r => r.results)
       .then(setCharacters);
   }, []);
 
-  const handleSubmit = filter => {
-    setQuery(filter);
-    console.log(filter);
-    navigate({ ...location, search: `query=${filter}` });
-    setSearchParams({ query: filter })
-    setCharacters([]);
-  };
-
   useEffect(() => {
-    if (query === '') {
+    if (name === '') {
       return;
     }
     API
-      .FetchFiltered(query)
+      .FetchFiltered(name)
       .then(r =>r.results)
-      .then(setFiltered);
-  }, [query]);
+      .then(setCharacters);
+  }, [name]);
 
   useEffect(() => {
     if (search === null) {
       return;
     }
-
     API.FetchFiltered(search)
       .then(r => r.results)
-      .then(setFiltered);
+      .then(setCharacters);
   }, [search]);
+
+  const handleSubmit = filter => {
+    setName(filter);
+    navigate({ ...location, search: `name=${filter}` });
+    setSearchParams({ name: filter })
+  };
 
   return (
     <>
       <Searchbar onSubmit={handleSubmit} />
       {characters && <CharactersList characters={characters} />}
-      {filtered && <CharactersList characters={filtered} />}
     </>
   );
 };
-// export const charactersLoader = async ({ request, params }) => {
-//   console.log({ request, params });
-//   return API.FetchCharacters().then(r => r.results);
-// };
-// export const filteredLoader = async ({ request, params }) => {
-//   console.log({ request, params });
-//   // const name = request.url;
-  
-//   return API.FetchFiltered(search).then(r=>r.results)
-// }
+export const charactersLoader = async ({ request, params }) => {
+  console.log({ request, params });
+  return API.FetchCharacters().then(r => r.results);
+};

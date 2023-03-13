@@ -26,6 +26,6 @@ export function FetchCharacterDetails(id) {
 
 export function FetchFiltered(name) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/?query=${name}`,
+    `${BASE_URL}/?name=${name}`,
   );
 }

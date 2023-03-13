@@ -24,8 +24,8 @@ export function FetchCharacterDetails(id) {
 //   );
 // }
 
-export function FetchFiltered(query) {
+export function FetchFiltered(name) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/?name=${query}`,
+    `${BASE_URL}/?query=${name}`,
   );
 }

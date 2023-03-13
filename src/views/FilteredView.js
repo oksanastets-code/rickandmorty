@@ -42,3 +42,9 @@ export default function FilteredView({ query }) {
     </>
   );
 }
+// export const filteredLoader = async ({ request, params }) => {
+//   console.log({ request, params });
+//   // const name = request.url;
+  
+//   return API.FetchFiltered(search).then(r=>r.results)
+// }

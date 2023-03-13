@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from './views/Layout';
 import  { HomeView, charactersLoader } from './views/HomeView';
-import FilteredView from './views/FilteredView';
+// import FilteredView, {filteredLoader} from './views/FilteredView';
 import CharacterDetailsView, { characterByIdLoader } from './views/CharacterDetailsView';
 import { ErrorView } from './views/ErrorView';
 
@@ -15,13 +15,14 @@ const router = createBrowserRouter([
         element: <HomeView />,
         index: true,
         errorElement: <ErrorView />,
-        loader: charactersLoader,
+        // loader: charactersLoader,
       },
-      {
-        path: '/filtered',
-        element: <FilteredView />,
-        errorElement: <ErrorView />,
-      },
+      // {
+      //   path: '/?query=',
+      //   element: <FilteredView />,
+      //   errorElement: <ErrorView />,
+      //   loader: filteredLoader,
+      // },
       {
         path: '/:id',
         element: <CharacterDetailsView />,

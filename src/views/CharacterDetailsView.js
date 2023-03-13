@@ -1,12 +1,11 @@
 
-import { useLoaderData, useNavigation, useLocation, useNavigate} from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate} from 'react-router-dom';
 import * as API from '../services/api';
 
 export default function CharacterDetailsView() {
   const character = useLoaderData();
   let navigate = useNavigate();
 
-  const { state } = useNavigation();
   const location = useLocation();
   console.log(location);
 

@@ -19,7 +19,6 @@ export default function Searchbar({ onSubmit }) {
       <form action="" onSubmit={handleSubmit}>
         <input
           type="text"
-          name="query"
           autoComplete="off"
           autoFocus
           placeholder="Filter by name..."

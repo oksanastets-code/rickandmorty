@@ -1,21 +1,22 @@
-
-import { useLoaderData, useLocation, useNavigate} from 'react-router-dom';
+import {
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import * as API from '../services/api';
 
 export default function CharacterDetailsView() {
   const character = useLoaderData();
   let navigate = useNavigate();
-
   const location = useLocation();
-  console.log(location);
 
   const onGoBack = () => {
-    // navigate(location?.state?.from ?? '/');
-    navigate(-1);
+    console.log(location);
+    navigate(location?.state?.from ?? '/');
   };
   return (
     <>
-      <button type="button" onClick={onGoBack} location={location}>
+      <button type="button" onClick={onGoBack}>
         Go back
       </button>
       {character && (
@@ -27,12 +28,12 @@ export default function CharacterDetailsView() {
           <p>Status {character.status}</p>
           <p>Origin {character.origin.name}</p>
           <p>Type {character.type}</p>
-        </div>)}      
+        </div>
+      )}
     </>
   );
 }
 export const characterByIdLoader = async ({ params }) => {
-  console.log({params});
   const id = params.id;
-  return API.FetchCharacterDetails(id).then(r=>r);
-}
+  return API.FetchCharacterDetails(id).then(r => r);
+};

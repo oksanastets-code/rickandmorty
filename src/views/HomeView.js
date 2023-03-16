@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-  useLoaderData,
   useLocation,
   useNavigate,
   useSearchParams,
@@ -16,7 +15,6 @@ export const HomeView = ({filter}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  // let characters = useLoaderData();
   const search = searchParams.get('name');
 
   useEffect(() => {
@@ -47,7 +45,7 @@ export const HomeView = ({filter}) => {
   const handleSubmit = filter => {
     setName(filter);
     navigate({ ...location, search: `name=${filter}` });
-    // setSearchParams({ name: filter })
+    setSearchParams({ name: filter })    
   };
 
   return (
@@ -56,7 +54,4 @@ export const HomeView = ({filter}) => {
       {characters && <CharactersList characters={characters} />}
     </>
   );
-};
-export const charactersLoader = async () => {
-  return API.FetchCharacters().then(r => r.results);
 };

@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+import { SearchOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
+
 export default function Searchbar({ onSubmit }) {
   const [filter, setFilter] = useState('');
 
@@ -17,12 +20,28 @@ export default function Searchbar({ onSubmit }) {
   return (
     <>
       <form action="" onSubmit={handleSubmit}>
-        <input
+        <Input
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Filter by name..."
+          prefix={
+            <SearchOutlined style={{ fontSize: '16px', color: '#808080' }} />
+          }
           onChange={changeFilter}
+          style={{
+            display: 'flex',
+            width: '1020px',
+            height: '56px',
+            padding: '16px',
+            margin: '0 auto 60px',
+            borderRadius: '8px',
+            border: '1px solid #808080',
+            color: '#808080',
+            fontWeight: '400',
+            fontSize: '16px',
+            lineHeight: '24px',
+          }}
         />
       </form>
     </>

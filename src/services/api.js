@@ -8,14 +8,14 @@ async function fetchWithErrorHandling(url = '', config = {}) {
 }
 
 export function FetchCharacters() {
-  return fetchWithErrorHandling(
-    `${BASE_URL}`,
-  );
+  return fetchWithErrorHandling(`${BASE_URL}`);
 }
 export function FetchCharacterDetails(id) {
-  return fetchWithErrorHandling(
-    `${BASE_URL}/${id}`,
-  );
+  return fetchWithErrorHandling(`${BASE_URL}/${id}`);
+}
+
+export function FetchFiltered(name) {
+  return fetchWithErrorHandling(`${BASE_URL}/?name=${name}`);
 }
 
 // export function FetchLoadMore(page) {
@@ -23,9 +23,3 @@ export function FetchCharacterDetails(id) {
 //     `${BASE_URL}/?page=${page}`,
 //   );
 // }
-
-export function FetchFiltered(name) {
-  return fetchWithErrorHandling(
-    `${BASE_URL}/?name=${name}`,
-  );
-}

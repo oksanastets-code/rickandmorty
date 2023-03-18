@@ -52,7 +52,7 @@ export const HomeView = ({ filter }) => {
       <Header />
       <main>
         <Searchbar onSubmit={handleSubmit} />
-        {characters.length>0 ? <CharactersList characters={characters} /> : null}
+        {characters && <CharactersList characters={characters} /> }
       </main>
       <Footer />
     </Container>

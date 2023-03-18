@@ -10,7 +10,6 @@ export default function CharacterDetailsView({ onClick }) {
   const location = useLocation();
 
   const onGoBack = () => {
-    console.log(location);
     navigate(location?.state?.from ?? '/');
   };
   return (

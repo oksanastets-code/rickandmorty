@@ -28,16 +28,29 @@ export default function CharactersList({ characters }) {
 const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  width: 1020px;
+  width: 100%;
   margin: 0 auto;
-  margin-bottom: -24px;
+  justify-content: center;
+  
+
+  @media screen and (min-width: 481px) {
+    width: 1020px;
+    margin-bottom: -24px;
+  }
 `;
 const Item = styled.li`
-  width: 240px;
-  margin-right: 20px;
-  margin-bottom: 24px;
-  &:nth-child(4n) {
-    margin-right: 0;
+  width: 312px;
+  &:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+  @media screen and (min-width: 481px) {
+    width: 240px;
+    margin-right: 20px;
+    margin-bottom: 24px;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
   }
 `;
 const CardWrapper = styled.div`
@@ -45,18 +58,22 @@ const CardWrapper = styled.div`
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 3px rgba(0, 0, 0, 0.12),
     0px 2px 4px rgba(0, 0, 0, 0.14);
 
-     transition: transform var(--animation-duration) var(--timing-function);
+  transition: transform var(--animation-duration) var(--timing-function);
 
-    &:hover{
-      transform: scale(1.03);
-      cursor: pointer;
-    }
+  &:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+  }
 `;
 
 const ImgWrapper = styled.div`
-  height: 168px;
+  height: 232px;
   background-size: cover;
   background-position-y: -30px;
+
+  @media screen and (min-width: 481px) {
+    height: 168px;
+  }
 `;
 const TextWrapper = styled.div`
   padding: 12px 16px;

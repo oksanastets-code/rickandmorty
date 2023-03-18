@@ -54,10 +54,14 @@ export const HomeView = ({ filter }) => {
         <Searchbar onSubmit={handleSubmit} />
         {characters && <CharactersList characters={characters} />}
       </main>
-      <Footer/>
+      <Footer />
     </Container>
   );
 };
 const Container = styled.div`
-width: 100%;
-`
+  width: 100%;
+  padding-top: 92px;
+  @media screen and (min-width: 481px) {
+    padding-top: 86px;
+  }
+`;

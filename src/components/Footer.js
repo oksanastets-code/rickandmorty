@@ -8,8 +8,12 @@ export default function Footer() {
   );
 }
 const FooterContainer = styled.footer`
-  width: 1020px;
+  width: 100%;
   margin: 80px auto 20px;
+
+  @media screen and (min-width: 481px) {
+    width: 1020px;
+  }
 `;
 
 const FooterText = styled.p`

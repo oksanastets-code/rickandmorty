@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import styled from 'styled-components';
+
 import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 
@@ -19,7 +21,7 @@ export default function Searchbar({ onSubmit }) {
   };
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
+      <Form action="" onSubmit={handleSubmit}>
         <Input
           type="text"
           autoComplete="off"
@@ -31,10 +33,10 @@ export default function Searchbar({ onSubmit }) {
           onChange={changeFilter}
           style={{
             display: 'flex',
-            width: '1020px',
+            width: '100%',
             height: '56px',
             padding: '16px',
-            margin: '0 auto 60px',
+            margin: '0 auto',
             borderRadius: '8px',
             border: '1px solid #808080',
             color: '#808080',
@@ -43,7 +45,16 @@ export default function Searchbar({ onSubmit }) {
             lineHeight: '24px',
           }}
         />
-      </form>
+      </Form>
     </>
   );
 }
+const Form = styled.form`
+  width: 312px;
+  margin: 0 auto 32px;
+
+  @media screen and (min-width: 481px) {
+    width: 1020px;
+    margin-bottom: 60px;
+  }
+`;

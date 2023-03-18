@@ -14,7 +14,7 @@ export default function CharacterDetailsView({ onClick }) {
     navigate(location?.state?.from ?? '/');
   };
   return (
-    <>
+    <Container>
       <Button onClick={onGoBack} />
 
       {character && (
@@ -24,34 +24,29 @@ export default function CharacterDetailsView({ onClick }) {
           <Title>Infomations</Title>
           <DataWrapper>
             <ItemWrapper>
-              <DataTitle>
-                Specie
-              </DataTitle><Data>{character.species}</Data>
+              <DataTitle>Specie</DataTitle>
+              <Data>{character.species}</Data>
             </ItemWrapper>
             <ItemWrapper>
-              <DataTitle>
-                Gender
-              </DataTitle><Data>{character.gender}</Data>
+              <DataTitle>Gender</DataTitle>
+              <Data>{character.gender}</Data>
             </ItemWrapper>
             <ItemWrapper>
-              <DataTitle>
-                Status 
-              </DataTitle><Data>{character.status}</Data>
+              <DataTitle>Status</DataTitle>
+              <Data>{character.status}</Data>
             </ItemWrapper>
             <ItemWrapper>
-              <DataTitle>
-                Origin 
-              </DataTitle><Data>{character.origin.name}</Data>
+              <DataTitle>Origin</DataTitle>
+              <Data>{character.origin.name}</Data>
             </ItemWrapper>
             <ItemWrapper>
-              <DataTitle>
-                Type 
-              </DataTitle>
-            </ItemWrapper><Data>{character.type}</Data>
+              <DataTitle>Type</DataTitle>
+              <Data>{character.type ? character.type : 'unknown'}</Data>
+            </ItemWrapper>
           </DataWrapper>
         </CardWrapper>
       )}
-    </>
+    </Container>
   );
 }
 export const characterByIdLoader = async ({ params }) => {
@@ -59,9 +54,13 @@ export const characterByIdLoader = async ({ params }) => {
   return API.FetchCharacterDetails(id).then(r => r);
 };
 
+const Container = styled.div`
+width: 100%;
+padding: 20px 50px 142px;
+`
 const CardWrapper = styled.div`
   width: 1020px;
-  margin: 32px auto 142px;
+  margin: 32px auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,18 +98,19 @@ const ItemWrapper = styled.div`
   flex-direction: column;
   border-bottom: 1px solid #ededed;
   width: 100%;
-  padding: 8px auto 12px 16px;
+  /* padding-top: 50px; */
+  padding: 8px 16px 12px 16px;
 `;
 const DataTitle = styled.p`
-font-weight: 700;
-font-size: 16px;
-line-height: 24px;
-letter-spacing: 0.15px;
-color:  #081f32;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  color: #081f32;
 `;
 const Data = styled.p`
-font-size: 14px;
-line-height: 20px;
-letter-spacing: 0.25px;
-color: #6E798C;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #6e798c;
 `;

@@ -1,10 +1,13 @@
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Media from 'react-media';
+
+import { sortByName } from '../utils/sort';
+import { cutName } from '../utils/cut';
 
 export default function CharactersList({ characters }) {
   const location = useLocation();
-  const sortByName = (a, b) => a.name.localeCompare(b.name);
   return (
     <List>
       {characters.sort(sortByName).map(character => (
@@ -15,8 +18,16 @@ export default function CharactersList({ characters }) {
                 style={{ backgroundImage: `url(${character.image})` }}
               ></ImgWrapper>
               <TextWrapper>
-                <Name>{character.name}</Name>
-                <Specie>Specie {character.species}</Specie>
+                <Media query="(max-width: 480px)">
+                  {matches =>
+                    matches ? (
+                      <Name>{character.name}</Name>
+                    ) : (
+                      <Name>{cutName(character.name)}</Name>
+                    )
+                  }
+                </Media>
+                <Specie>{character.species}</Specie>
               </TextWrapper>
             </CardWrapper>
           </Link>
@@ -31,7 +42,6 @@ const List = styled.ul`
   width: 100%;
   margin: 0 auto;
   justify-content: center;
-  
 
   @media screen and (min-width: 481px) {
     width: 1020px;
@@ -41,8 +51,8 @@ const List = styled.ul`
 const Item = styled.li`
   width: 312px;
   &:not(:last-child) {
-  margin-bottom: 32px;
-}
+    margin-bottom: 32px;
+  }
 
   @media screen and (min-width: 481px) {
     width: 240px;
@@ -57,7 +67,6 @@ const CardWrapper = styled.div`
   border-radius: 3px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 3px rgba(0, 0, 0, 0.12),
     0px 2px 4px rgba(0, 0, 0, 0.14);
-
   transition: transform var(--animation-duration) var(--timing-function);
 
   &:hover {

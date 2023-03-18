@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import * as API from '../services/api';
 
+import styled from 'styled-components';
+
 import Header from '../components/Header';
 import CharactersList from '../components/CharactersList.jsx';
 import Searchbar from '../components/SearchBar';
@@ -46,13 +48,16 @@ export const HomeView = ({ filter }) => {
   };
 
   return (
-    <>
+    <Container>
       <Header />
       <main>
         <Searchbar onSubmit={handleSubmit} />
         {characters && <CharactersList characters={characters} />}
       </main>
       <Footer/>
-    </>
+    </Container>
   );
 };
+const Container = styled.div`
+width: 100%;
+`

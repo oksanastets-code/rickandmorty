@@ -5,6 +5,7 @@ import * as API from '../services/api';
 import Header from '../components/Header';
 import CharactersList from '../components/CharactersList.jsx';
 import Searchbar from '../components/SearchBar';
+import Footer from '../components/Footer';
 
 export const HomeView = ({ filter }) => {
   const [name, setName] = useState('');
@@ -51,7 +52,7 @@ export const HomeView = ({ filter }) => {
         <Searchbar onSubmit={handleSubmit} />
         {characters && <CharactersList characters={characters} />}
       </main>
-      <footer><p>Reenbit's Test task by Oksana Stets</p></footer>
+      <Footer/>
     </>
   );
 };

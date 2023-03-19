@@ -76,6 +76,7 @@ const CardWrapper = styled.div`
 `;
 
 const ImgWrapper = styled.div`
+  border-top-radius: 3px;
   height: 232px;
   background-size: cover;
   background-position-y: -30px;

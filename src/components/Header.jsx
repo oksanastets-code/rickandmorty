@@ -1,13 +1,16 @@
-import logoDesktop from '../images/logo-desktop.png';
-import logoMobile from '../images/logo-mobile.png';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import Media from 'react-media';
 
-export default function Header() {
+import logoDesktop from '../images/logo-desktop.png';
+import logoMobile from '../images/logo-mobile.png';
+
+export default function Header({onClick}) {
   return (
     <LogoHeader>
-      <Media query="(max-width: 480px)">
+      <Link to="/" onClick={onClick}>
+        <Media query="(max-width: 480px)">
         {matches =>
           matches ? (
             <LogoMobile src={logoMobile} alt="logo-mobile" />
@@ -16,6 +19,8 @@ export default function Header() {
           )
         }
       </Media>
+      </Link>
+      
     </LogoHeader>
   );
 }

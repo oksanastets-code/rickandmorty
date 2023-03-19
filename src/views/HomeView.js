@@ -9,7 +9,7 @@ import CharactersList from '../components/CharactersList.jsx';
 import Searchbar from '../components/SearchBar';
 import Footer from '../components/Footer';
 
-export const HomeView = ({ filter }) => {
+export const HomeView = ({ filter, onClick }) => {
   const [name, setName] = useState('');
   const [characters, setCharacters] = useState([]);
   const location = useLocation();
@@ -46,10 +46,16 @@ export const HomeView = ({ filter }) => {
     navigate({ ...location, search: `name=${filter}` });
     setSearchParams({ name: filter });
   };
-
+  const handleLogoClick = () => {
+    setCharacters([]);
+    API.FetchCharacters()
+      .then(r => r.results)
+      .then(setCharacters);
+  }
+   
   return (
     <Container>
-      <Header />
+      <Header onClick={handleLogoClick} />
       <main>
         <Searchbar onSubmit={handleSubmit} />
         {characters && <CharactersList characters={characters} /> }
